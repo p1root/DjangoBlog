@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+{% load humanize %}
+{% load static %}
+{% block Metatitle %}{{titleCat}}{% endblock Metatitle %}
+{% load blog_extions %}
+{% block main %}
+<div class="breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <h2 class="lg-title">{{titleCat}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    {% for article in object_list %}
+                        <div class="col-lg-6 col-md-6">
+                            <article class="post-grid mb-5">
+                                <div class="post-thumb mb-4">
+                                    <a href="{% url 'blog:detail' article.slug %}"><img src="{{article.picture.url}}" alt="" class="img-fluid w-100"></a>
+                                </div>
+                                <span
+                                    class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">{{article.title}}</span>
+                                <h3 class="post-title mt-1"><a href="{% url 'blog:detail' article.slug %}">{{article.short_decription|safe}}</a></h3>
+
+                                <span class=" text-muted  text-capitalize">{{article.publsihDate|naturalday}}</span>
+
+                            </article>
+                        </div>
+                        {% empty %}
+                        <div class="col-lg-6 col-md-6">
+                            <article class="post-grid mb-5">
+                                <div class="post-thumb mb-4">
+                                    <img src="/media/images/Articles/NoArticle.jpg" alt="" class="img-fluid w-100">
+                                </div>
+                                <span
+                                    class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"></span>
+                                <h3 class="post-title mt-1"><a href="#">فعلا متنی برای نمایش وجود ندارد</a></h3>
+
+                                <span class=" text-muted  text-capitalize">{{article.publsihDate|naturalday}}</span>
+
+                            </article>
+                        </div>
+                        {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="sidebar-wrap mt-5 mt-lg-0">
+   
+        {% hotArticles %}
+        {% categorySidebar %}
+                        
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-auto">
+        {% if page_obj.has_other_pages %}
+                            <div class="pagination mt-5 pt-4">
+                            <ul class="list-inline">
+                                {% if page_obj.has_previous %}
+                                <li class="list-inline-item"><a href="?page={{ page_obj.previous_page_number }}"><i class="ti-arrow-right"></i></a></li>
+                                {% else %}
+                                <li class="list-inline-item disabled"><i class="ti-arrow-right"></i></li>
+                                {% endif %}
+                                {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="list-inline-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li class="list-inline-item"><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li class="list-inline-item"><a href="?page={{ page_obj.next_page_number }}"><i class="ti-arrow-left"></i></a></li>
+                                {% else %}
+                                <li class="list-inline-item disabled"><i class="ti-arrow-left"></i></li>
+                                {% endif %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                        </div>
+</section>
+
+
+
+{% endblock main %}

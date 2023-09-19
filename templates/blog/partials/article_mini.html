@@ -1,0 +1,15 @@
+
+{% load humanize %}
+<div class="sidebar-widget mb-5 ">
+    <h4 class="text-center widget-title">{{title}}</h4>
+    {% for article in articles %}
+    <div class="media py-3 sidebar-post-item">
+        <a href="{% url 'blog:detail' article.slug %}"><img class="mr-4" src="{{article.picture.url}}" alt="{{article.title}}"></a>
+        <div class="media-body">
+            <span class="text-muted letter-spacing text-uppercase font-sm">{{article.publsihDate|naturalday}}</span>
+            <h4><a href="{% url 'blog:detail' article.slug %}l">{{article.title}}</a></h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

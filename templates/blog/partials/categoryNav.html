@@ -1,0 +1,14 @@
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        دسته بندی ها
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% for cat in categoris %}
+            
+            <a class="dropdown-item text-center" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
+            {% endfor %}
+        </div>
+</li>

@@ -1,0 +1,38 @@
+{% extends 'registration/base.html' %}
+{% block title-meta %}حساب کاربری{% endblock title-meta %}
+{% block Main %}
+
+{% load crispy_forms_tags %}
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title ml-0 mr-auto">حساب کاربری</h3>
+    </div>
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+            {{form.username|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            {{form.first_name|as_crispy_field }}
+        </div>
+        <div class="col-6">
+            {{form.last_name|as_crispy_field }}
+        </div>
+        <div class="col-6">
+            {{form.email|as_crispy_field }}
+        </div> 
+        <div class="col-6">
+            {{form.special_suer|as_crispy_field }}
+        </div>
+        <div class="col-6">
+            {{form.address|as_crispy_field }}
+        </div>              
+    </div>
+    <button class="btn btn-success">ثبت</button>
+</form>
+
+</div>
+{% endblock Main %}
+
+

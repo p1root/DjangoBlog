@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% block Metatitle %}ارتباط با ما{% endblock Metatitle %}
+
+{% block main %}
+<section class="pt-5 padding-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="images/contact.jpg" alt="" class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <p class="mt-5 mb-5">صفحه ی ارتباط با ما</p>
+
+                        <form id="contact-form" class="contact-form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="name">نام شما (الزامی)</label>
+                                        <input class="form-control form-control-name" name="name" id="name"
+                                            type="text" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">ایمیل شما (لزامی)</label>
+
+                                        <input class="form-control form-control-email" name="email" id="email"
+                                            type="email" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="message">پیام شما</label>
+                                        <textarea class="form-control form-control-message" name="message"
+                                            id="message" rows="7" required></textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary solid blank mt-3" type="submit">ارسال پیام</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

@@ -1,0 +1,121 @@
+{% extends 'blog/base.html' %}
+{% block title %} {{article.slug}} {% endblock title %}
+{% load static %}
+{% load comment_tags %}
+{% load ratings %}
+{% load humanize %}
+
+{% load blog_extions %}
+{% block Metatitle %}{{object.title}}{% endblock Metatitle %}
+{% block main %}
+
+<div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <div class="single-post">
+                        <div class="post-header mb-5 text-center">
+                            
+                            <h2 class="post-title mt-2">
+                                {{object.title}}
+                            </h2>
+
+                            <div class="post-meta">
+                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">توسط : {{object.user.get_full_name}}</span>
+                                <br>
+                                <span class="text-uppercase font-sm letter-spacing-1">{{object.publsihDate|naturalday}}</span>
+                            </div>
+                            <div class="post-featured-image mt-5">
+                                <img src="{{object.picture.url}}" class="img-fluid w-100" alt="featured-image">
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <div class="entry-content">
+                                <p> 
+                                    {% if object.is_special %}
+                            {% if user.is_special_user or user.is_superuser %}
+                                {{object.decription|safe}}
+                            {% else %}
+                            <p>این مقاله ویژه است برای نمایش نیاز به خرید اشتراک است</p>
+                            {% endif %}
+                        {% else %}
+                        <div class="text-justify">{{object.decription|safe}}</div>
+                        {% endif %}
+                                </p>
+                            </div>
+
+                            <div class="meta-cat">
+                                 {% for cat in article.category.all %}
+                                <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
+                                    href="{% url 'blog:category' cat.slug %}">#{{cat.title}} , </a>
+                                {% endfor %}
+                            </div>
+
+<!-- 
+                            <div
+                                class="tags-share-box center-box d-flex text-center justify-content-between border-top border-bottom py-3">
+
+                                <span class="single-comment-o"><i class="fa fa-comment-o"></i>0 comment</span>
+
+                                <div class="post-share">
+                                    <span class="count-number-like">2</span>
+                                    <a class="penci-post-like single-like-button"><i class="ti-heart"></i></a>
+                                </div>
+
+                                <div class="list-posts-share">
+                                    <a target="_blank" rel="nofollow" href="#"><i class="ti-facebook"></i></a>
+                                    <a target="_blank" rel="nofollow" href="#"><i class="ti-twitter"></i></a>
+                                    <a target="_blank" rel="nofollow" href="#"><i class="ti-pinterest"></i></a>
+                                    <a target="_blank" rel="nofollow" href="#"><i class="ti-linkedin"></i></a>
+                                </div>
+                            </div> -->
+                            <hr>
+                        </div>
+                    </div>
+
+                    
+                   
+                    <div class="comment-area my-5">
+                        
+                        {% render_comments object request %}
+                        {% include_bootstrap %}
+                        </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="sidebar sidebar-right">
+                        <div class="sidebar-wrap mt-5 mt-lg-0">
+                            <div class="sidebar-widget about mb-5 text-center p-3">
+                                <div class="about-author">
+                                    <img src="{{object.user.picture.url}}" alt="" class="img-fluid">
+                                </div>
+                                <h4 class="mb-0 mt-4">{{object.user.get_full_name}}</h4>
+                                <p>نویسنده</p>
+                                <p>توضیحاتی در مورد نویسنده</p>
+                                <img src="{% static '/blog/images/liammason.png' %}" alt="تصویر امضا" class="img-fluid">
+                            </div>
+
+                            <div class="sidebar-widget follow mb-5 text-center">
+                                <h4 class="text-center widget-title">من را دنبال کنید در</h4>
+                                <div class="follow-socials">
+                                    <a href="#"><i class="ti-facebook"></i></a>
+                                    <a href="#"><i class="ti-twitter"></i></a>
+                                    <a href="#"><i class="ti-instagram"></i></a>
+                                    <a href="#"><i class="ti-youtube"></i></a>
+                                    <a href="#"><i class="ti-pinterest"></i></a>
+                                </div>
+                            </div>
+
+                            
+                            
+        {% hotArticles %}
+
+         {% categorySidebar %}
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+{% endblock main %}

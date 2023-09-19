@@ -1,0 +1,38 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<!---Coding By CoderGirl | www.codinglabweb.com--->
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ورود</title>
+  <!---Custom CSS File--->
+   <link href="{% static '\registration\css\style_login.css' %}" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>ورود</header>
+      <form method="post" id="login-form">
+        {% csrf_token %}
+        <p>{{form.non_field_errors}}</p>
+        {{form.username|attr:'placeholder = نام‌کابری'}}
+        {{form.password|attr:'placeholder= گذرواژه'}}
+        <a href="#">رمز خود را فراموش کردید؟</a>
+        <input id="submit" type="submit" class="button" value="ورود">
+      </form>
+      <div class="signup">
+        <span class="signup">حسابی ندارید؟
+         <a href="{% url 'signup' %}"><label>ثبت نام</label></a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static '\registration\js\scripts.js' %}"></script> -->
+</body>
+</html>
